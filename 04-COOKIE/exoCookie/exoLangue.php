@@ -16,21 +16,19 @@
 */
 var_dump($_COOKIE);
 
-if (!isset($_COOKIE["lang"])) {
-    setcookie("lang", "en", time() + (7 * 24 * 3600));
-}
-
 if(isset($_GET["lang"])) {
     $selectedLanguage = $_GET["lang"];
     setcookie("lang",$selectedLanguage,time() + (7 * 24 * 3600));
     header("location:exoLangue.php");
     exit;
+}else {
+      $defaultlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 }
-$lang = $_COOKIE["lang"] ?? "en";
+$lang = $_COOKIE["lang"] ?? $defaultlang ;
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
